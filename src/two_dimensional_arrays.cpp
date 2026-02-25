@@ -160,7 +160,7 @@ void twoDimensionalArrays() {
     std::cout << "Flat array as 2D:" << '\n';
 
     for (int r = 0; r < rows; ++r) {
-        std::cout << " Row " << r << ": ";
+        std::cout << "  Row " << r << ": ";
         for (int c = 0; c < cols; ++c) {
             std::cout << flat[r * cols + c] << " ";
         }
