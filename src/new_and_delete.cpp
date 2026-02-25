@@ -235,7 +235,7 @@ void newAndDelete() {
     
     std::cout << "sharedA value:"<< *sharedA << '\n';
     std::cout << "sharedB value:"<< *sharedB << '\n';
-    std::cout << "Reference count: "<< sharedA.use_count() << '\n';
+    std::cout << "Reference count:"<< sharedA.use_count() << '\n';
 
     // Expected output: "sharedB value: 77"
     // Expected output: "Reference count: 2"
