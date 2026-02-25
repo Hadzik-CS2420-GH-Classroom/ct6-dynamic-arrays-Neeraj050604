@@ -147,6 +147,12 @@ void twoDimensionalArrays() {
     // TODO: Fill it using flat[r * cols + c] = (r * cols) + c + 1
     //       Same values as before: 1 through 12
 
+    for (int r = 0;r < rows;++r) {
+        for (int c = 0;c < cols;++c) {
+            flat[r * cols + c] = (r * cols) + c + 1;
+        }
+    }
+
     // TODO: Print the flat array as a 2D grid using the index formula
     
    
