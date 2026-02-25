@@ -233,13 +233,13 @@ void newAndDelete() {
     // TODO: Print the value through both pointers and the reference count
     // Expected output: "sharedA value: 77"
     
-    std::cout << "sharedA value:" << *sharedA << '\n';
-    std::cout << "sharedB value:" << *sharedB << '\n';
-    std::cout << "Reference count: " << sharedA.use_count() << '\n';
+    std::cout << "sharedA value:"<< *sharedA << '\n';
+    std::cout << "sharedB value:"<< *sharedB << '\n';
+    std::cout << "Reference count: "<< sharedA.use_count() << '\n';
 
     // Expected output: "sharedB value: 77"
     // Expected output: "Reference count: 2"
     //       Hint: use sharedA.use_count() for the reference count
 
-    std::cout << "Both pointers share the same heap memory!" << '\n';
+    std::cout << "Both pointers share the same heap memory!"<< '\n';
 }
