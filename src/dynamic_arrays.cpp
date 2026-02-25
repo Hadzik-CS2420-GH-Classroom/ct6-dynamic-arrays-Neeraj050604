@@ -116,7 +116,7 @@ void dynamicArrays() {
     // TODO: Set a new variable 'newCapacity' to capacity * 2
     // Expected output: "New capacity: 8"
 
-    int newCapacity = capacity = 2;
+    int newCapacity = capacity*2;
     std::cout << "New capacity: " << newCapacity << '\n';
 
     // Step 2: Allocate a new, bigger array
