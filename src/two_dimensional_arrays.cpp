@@ -51,16 +51,23 @@ void twoDimensionalArrays() {
     // TODO: Allocate an array of int* pointers with 'rows' elements
     //       Store it in int** called 'table'
     //       Hint: int** table = new int*[rows];
-    //
+    
+    int** table = new int* [rows];
     // ! DISCUSSION: What does new int*[rows] allocate?
     //   It allocates an array of 'rows' pointers on the heap.
     //   Each pointer is uninitialized — they don't point anywhere yet.
     //   We need a second step to allocate each row.
 
     // TODO: Use a for loop to allocate each row: table[i] = new int[cols];
-    //
+    
+    for (int i = 0; i < rows; i++) {
+        table[i] = new int[cols];
+    }
+
     // ? SEE DIAGRAM: images/two_d_rows.png — full picture after loop + delete order + flat alternative
-    //
+    
+
+
     // ! DISCUSSION: Why two separate allocations?
     //   The first new creates the "spine" (array of row pointers).
     //   Each loop iteration creates one "rib" (a row of actual ints).
@@ -70,6 +77,11 @@ void twoDimensionalArrays() {
 
     // TODO: Fill the table with values where table[r][c] = (r * cols) + c + 1
     //       This gives us: row 0 = {1,2,3,4}, row 1 = {5,6,7,8}, row 2 = {9,10,11,12}
+
+    for (int r = 0; r < rows; ++r) {
+        for (int c = 0; c < cols; ++c)
+            table[r][c] = (r * cols) + c + 1;
+    }
 
     // TODO: Print the 2D array using nested for loops
     // Expected output:
@@ -81,11 +93,23 @@ void twoDimensionalArrays() {
 
     // your nested loops here
 
+    for (int r = 0; r < rows; ++r) {
+        std::cout << " Row " << r << ": ";
+        for (int c = 0; c < cols; ++c) {
+            std::cout << table[r][c] << " ";
+        }
+        std::cout << '\n';
+    }
+
     // --- 3. Freeing a dynamic 2D array ---
     std::cout << "\n--- 3. Freeing a Dynamic 2D Array ---" << '\n';
 
     // TODO: Use a for loop to delete[] each row first
-    //
+    
+    for (int i = 0; i < rows; ++i) {
+        delete[] table[i];
+    }
+
     // ! DISCUSSION: Why delete rows before the spine?
     //   If we delete the spine (table) first, we lose the pointers to
     //   each row — those rows become memory leaks! Always free in
@@ -94,6 +118,10 @@ void twoDimensionalArrays() {
     //     Free:      rows first, then spine
 
     // TODO: Delete the spine (the array of pointers) with delete[] table
+    
+    delete[] table;
+    table = nullptr;
+
     // TODO: Set table to nullptr
 
     std::cout << "2D array memory freed (rows first, then spine)" << '\n';
@@ -114,10 +142,16 @@ void twoDimensionalArrays() {
     //       Store it in int* called 'flat'
     //       Hint: int* flat = new int[rows * cols];
 
+    int* flat = new int[rows * cols];
+
     // TODO: Fill it using flat[r * cols + c] = (r * cols) + c + 1
     //       Same values as before: 1 through 12
 
     // TODO: Print the flat array as a 2D grid using the index formula
+    
+   
+    
+
     // Expected output:
     //   Flat array as 2D:
     //     Row 0: 1 2 3 4
@@ -125,12 +159,22 @@ void twoDimensionalArrays() {
     //     Row 2: 9 10 11 12
     std::cout << "Flat array as 2D:" << '\n';
 
-    // your nested loops here
+    for (int r = 0; r < rows; ++r) {
+        std::cout << " Row " << r << ": ";
+        for (int c = 0; c < cols; ++c) {
+            std::cout << flat[r * cols + c] << " ";
+        }
+        std::cout << '\n';
+    }
+    std::cout << "Flat array freed (just one delete[]!)" << '\n';
+    delete[]flat;
 
+    // your nested loops here
+    
     // TODO: Free the flat array with delete[] and set to nullptr
 
     std::cout << "Flat array freed (just one delete[]!)" << '\n';
-
+    flat = nullptr;
     // ! DISCUSSION: Which approach is better?
     //   For most purposes, the flat array is preferred:
     //     - One allocation, one deallocation

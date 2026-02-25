@@ -25,6 +25,8 @@ void newAndDelete() {
     //       Store the result in int* called 'heapArray'
     //       Hint: int* heapArray = new int[size];
     //
+    int* heapArray = new int[size];
+    // 
     // ! DISCUSSION: What does 'new int[size]' actually do?
     //   1. Asks the OS for (size * sizeof(int)) bytes of heap memory
     //   2. Returns a pointer to the first element of that block
@@ -46,10 +48,16 @@ void newAndDelete() {
     // TODO: Use a for loop to fill the array with values 10, 20, 30, 40, 50
     //       Hint: heapArray[i] = (i + 1) * 10;
 
+    for (int i = 0; i < size; ++i) {
+        heapArray[i] = (i + 1) * 10;
+    }
+
     // TODO: Print all elements of the heap array using a for loop
     // Expected output: "Heap array: 10 20 30 40 50"
     std::cout << "Heap array: ";
-
+    for (int i = 0; i < size; ++i) {
+        std::cout << heapArray[i] << ' ';
+    }
     // your loop here
 
     std::cout << '\n';
@@ -59,7 +67,9 @@ void newAndDelete() {
     std::cout << "\n--- 2. Freeing Arrays with delete[] ---" << '\n';
 
     // TODO: Use 'delete[]' to free the heap array
-    //
+    
+    delete[] heapArray;
+
     // ! DISCUSSION: Why must we call delete[]?
     //   Unlike stack variables, heap memory is NOT automatically freed.
     //   If we lose the pointer without calling delete[], that memory is
@@ -116,7 +126,9 @@ void newAndDelete() {
     //        at this level — it's the foundation everything else sits on
 
     // TODO: Create a std::unique_ptr<int> called 'smartValue' using std::make_unique<int>(99)
-    //
+    
+    auto smartValue = std::make_unique<int>(99);
+
     // ! DISCUSSION: What does 'auto' mean here?
     //   auto tells the compiler: "figure out the type for me."
     //   The right-hand side is std::make_unique<int>(99), which returns a
@@ -142,9 +154,18 @@ void newAndDelete() {
     // TODO: Print the value by dereferencing the unique_ptr (use * just like a raw pointer)
     // Expected output: "Smart value: 99"
 
+    std::cout << "Smart value: " << *smartValue << '\n';
+
+    auto smartArray = std::make_unique<int[]>(3);
+
     // TODO: Create a unique_ptr to a dynamic array of 3 ints
     //       Hint: auto smartArray = std::make_unique<int[]>(3);
-    //
+    
+    smartArray[0] = 100;
+    smartArray[1] = 200;
+    smartArray[2] = 300;
+
+
     // ! DISCUSSION: unique_ptr with arrays
     //   std::make_unique<int[]>(3) allocates an array of 3 ints on the heap.
     //   The unique_ptr knows it's an array and will call delete[] (not delete)
@@ -156,6 +177,9 @@ void newAndDelete() {
     // TODO: Print all elements of the smart array
     // Expected output: "Smart array: 100 200 300"
     std::cout << "Smart array: ";
+    for (int i = 0; i < 3; i++) {
+        std::cout << smartArray[i] << ' ';
+    }
 
     // your loop here
 
@@ -190,9 +214,13 @@ void newAndDelete() {
 
     // TODO: Create a shared_ptr<int> called 'sharedA' using std::make_shared<int>(77)
 
+    auto sharedA = std::make_shared<int>(77);
+
     // TODO: Create a second shared_ptr<int> called 'sharedB' that copies sharedA
     //       Hint: auto sharedB = sharedA;
-    //
+    
+    auto sharedB = sharedA;
+
     // ! DISCUSSION: How does shared_ptr allow copies?
     //   shared_ptr keeps a reference count. When you copy it, the count
     //   goes up. When a copy is destroyed, the count goes down. The
@@ -204,6 +232,11 @@ void newAndDelete() {
 
     // TODO: Print the value through both pointers and the reference count
     // Expected output: "sharedA value: 77"
+    
+    std::cout << "SharedA value:" << *sharedA << '\n';
+    std::cout << "SharedB value:" << *sharedB << '\n';
+    std::cout << "Reference count :" << sharedA.use_count() << '\n';
+
     // Expected output: "sharedB value: 77"
     // Expected output: "Reference count: 2"
     //       Hint: use sharedA.use_count() for the reference count
