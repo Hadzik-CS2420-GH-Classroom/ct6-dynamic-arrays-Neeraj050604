@@ -233,9 +233,9 @@ void newAndDelete() {
     // TODO: Print the value through both pointers and the reference count
     // Expected output: "sharedA value: 77"
     
-    std::cout << "SharedA value:" << *sharedA << '\n';
-    std::cout << "SharedB value:" << *sharedB << '\n';
-    std::cout << "Reference count :" << sharedA.use_count() << '\n';
+    std::cout << "sharedA value:" << *sharedA << '\n';
+    std::cout << "sharedB value:" << *sharedB << '\n';
+    std::cout << "Reference count: " << sharedA.use_count() << '\n';
 
     // Expected output: "sharedB value: 77"
     // Expected output: "Reference count: 2"
